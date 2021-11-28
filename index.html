@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICON CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/modal.css" rel="stylesheet">
+    <link href="styles/scrollbar.css" rel="stylesheet">
+    <link href="styles/cv.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <main class="main">
+        <div class="sidebar">
+            <div class="sidebar__first">
+                <img class="sidebar__icon" src="assets/images/icon-logo.png">
+            </div>
+            <div class="sidebar__second">
+                <div class="sidebar__heading">
+                    <h1 class="sidebar__headline">Thông tin</h1>
+                    <button class="sidebar__heading-button" id="js-download-pdf">
+                        <img class="sidebar__heading-icon" src="assets/images/download.svg">
+                    </button>
+                </div>
+                <form class="form">
+                    <div class="form__control form__control--side">
+                        <label class="form__label--file" for="profile-picture">
+                            <img src="assets/images/upload.svg">
+                        </label>
+                        <input class="form__file" type="file" id="profile-picture" name="profile-picture" hidden>
+                        <div class="form__control--left">
+                            <label class="form__label" for="profile-picture-external">Đường dẫn ảnh</label>
+                            <input class="form__input" type="text" id="profile-picture-external"
+                                name="profile-picture-external">
+                        </div>
+                    </div>
+
+                    <div class="form__control form__control--split">
+                        <div>
+                            <label class="form__label" for="last-name">Họ</label>
+                            <input class="form__input" type="text" id="last-name" name="last-name" value="Nguyễn">
+                        </div>
+                        <div>
+                            <label class="form__label" for="first-name">Tên</label>
+                            <input class="form__input" type="text" id="first-name" name="first-name" value="Văn A">
+                        </div>
+                    </div>
+
+                    <div class="form__control">
+                        <label class="form__label" for="subtitle">Tiêu đề phụ</label>
+                        <input class="form__input" type="text" id="subtitle" name="subtitle" value="Lập trình viên">
+                    </div>
+
+                    <div class="form__control">
+                        <label class="form__label" for="dob">Ngày sinh</label>
+                        <input class="form__input" type="date" id="dob" name="dob" value="2021-10-06">
+                    </div>
+
+                    <hr class="form__hr" />
+
+                    <div class="form__control">
+                        <label class="form__label" for="address">Địa chỉ</label>
+                        <input class="form__input" type="text" id="address" name="address"
+                            value="Số 19 Nguyễn Hữu Thọ, Phường Tân Phong, Quận 7, TP. Hồ Chí Minh, Việt Nam">
+                    </div>
+
+                    <hr class="form__hr" />
+
+                    <div class="form__control">
+                        <label class="form__label" for="phone">Số điện thoại</label>
+                        <input class="form__input" type="text" id="phone" name="phone" value="+84 1234567890">
+                    </div>
+
+                    <div class="form__control">
+                        <label class="form__label" for="email">Email</label>
+                        <input class="form__input" type="text" id="email" name="email"
+                            value="icon.acaclub@it.tdt.edu.vn">
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Mạng xã hội
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="social-network-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="social-network-heading"
+                                    name="social-network-heading">
+                            </div>
+
+                            <div class="form__items" id="js-socials-form-items">
+
+                            </div>
+
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-social-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Mục đích
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="objective-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="objective-heading" name="objective-heading">
+                            </div>
+                            <div class="form-control">
+                                <label class="form__label" for="objective-content">Nội dung</label>
+                                <textarea class="form__input form__input--area" id="objective-content"
+                                    name="objective-content" rows="5">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Kinh nghiệm làm việc
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="work-experience-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="work-experience-heading"
+                                    name="work-experience-heading" value="Kinh nghiệm làm việc">
+                            </div>
+                            <div class="form__items" id="js-experiences-form-items">
+                            </div>
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-experience-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Giáo dục
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="education-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="education-heading" name="education-heading"
+                                    value="Giáo dục">
+                            </div>
+                            <div class="form__items" id="js-educations-form-items">
+                            </div>
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-education-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Dự án
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="project-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="project-heading" name="project-heading"
+                                    value="Dự án">
+                            </div>
+                            <div class="form__items" id="js-projects-form-items">
+                            </div>
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-project-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Giải thưởng
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="award-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="award-heading" name="award-heading"
+                                    value="Giải thưởng">
+                            </div>
+                            <div class="form__items" id="js-awards-form-items">
+                            </div>
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-award-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form__section">
+                        <h2 class="form__subheading">
+                            Chứng chỉ
+                        </h2>
+
+                        <div class="form__content">
+                            <div class="form__control">
+                                <label class="form__label" for="certificate-heading">Tiêu đề</label>
+                                <input class="form__input" type="text" id="certificate-heading"
+                                    name="certificate-heading" value="Chứng chỉ">
+                            </div>
+                            <div class="form__items" id="js-certificates-form-items">
+                            </div>
+                            <div class="form__section-actions">
+                                <button class="form__section-add" type="button" id="js-certificate-modal-trigger">
+                                    Thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="cv__wrapper">
+            <div class="cv" id="cv">
+                <div class="cv__left">
+                    <div class="cv__profile">
+                        <img class="cv__profile-picture" id="js-profile-picture" src="assets/images/icon-logo.png">
+                    </div>
+
+                    <div class="cv__socials" id="js-socials">
+                        <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/map-pin.svg">
+                            <p class="cv__social-content" id="js-address">
+                                Số 19 Nguyễn Hữu Thọ, Phường Tân Phong, Quận 7, TP. Hồ Chí Minh, Việt Nam
+                            </p>
+                        </div>
+
+                        <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/phone.svg">
+                            <p class="cv__social-content" id="js-phone">
+                                +84 1234567890
+                            </p>
+                        </div>
+
+                        <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/mail.svg">
+                            <p class="cv__social-content" id="js-email">
+                                icon.acaclub@it.tdtu.edu.vn
+                            </p>
+                        </div>
+
+                        <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/calendar.svg">
+                            <p class="cv__social-content" id="js-dob">
+                                6/10/2021
+                            </p>
+                        </div>
+
+                        <!-- <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/linkedin.svg">
+                            <p class="cv__social-content">
+                                Anonymous
+                            </p>
+                        </div>
+
+                        <div class="cv__social">
+                            <img class="cv__social-icon" src="assets/images/github.svg">
+                            <p class="cv__social-content">
+                                iconclub
+                            </p>
+                        </div> -->
+                    </div>
+
+                    <div class="cv__awards" id="js-awards">
+                        <h3 class="cv__awards-heading" id="js-award-heading">
+                            Giải thưởng
+                        </h3>
+
+                        <!-- <div class="cv__award">
+                            <div class="cv__award-left">
+                                <p class="cv__award-title">
+                                    International Flutter Hackathon
+                                </p>
+                                <p class="cv__award-authority">
+                                    Google
+                                </p>
+                            </div>
+                            <p class="cv__award-time">January 2000</p>
+                        </div>
+
+                        <div class="cv__award">
+                            <div class="cv__award-left">
+                                <p class="cv__award-title">
+                                    International Angular Hackathon
+                                </p>
+                                <p class="cv__award-authority">
+                                    Google
+                                </p>
+                            </div>
+                            <p class="cv__award-time">January 2021</p>
+                        </div> -->
+                    </div>
+
+                    <div class="cv__certificates" id="js-certificates">
+                        <h3 class="cv__certificates-heading" id="js-certificate-heading">
+                            Chứng chỉ
+                        </h3>
+
+                        <!-- <div class="cv__certificate">
+                            <div class="cv__certificate-left">
+                                <p class="cv__certificate-title">
+                                    CCNA
+                                </p>
+                                <p class="cv__certificate-authority">
+                                    Cisco Systems
+                                </p>
+                            </div>
+                            <p class="cv__certificate-time">October 2000</p>
+                        </div>
+
+                        <div class="cv__certificate">
+                            <div class="cv__certificate-left">
+                                <p class="cv__certificate-title">
+                                    DCUCI 642-999
+                                </p>
+                                <p class="cv__certificate-authority">
+                                    Cisco Systems
+                                </p>
+                            </div>
+                            <p class="cv__certificate-time">October 2001</p>
+                        </div> -->
+                    </div>
+
+                </div>
+                <div class="cv__right">
+                    <div class="cv__hero">
+                        <h2 class="cv__hero-name">
+                            <span class="cv__hero-last" id="js-last">Nguyễn</span>
+                            <span class="cv__hero-first" id="js-first">Văn A</span>
+                        </h2>
+                        <p class="cv__hero-subtitle" id="js-subtitle">Lập trình viên</p>
+
+                        <div class="cv__objective">
+                            <p class="cv__objective-content" id="js-objective-content">
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="cv__experiences" id="js-experiences">
+                        <h3 class="cv__experiences-heading" id="js-work-experience-heading">
+                            Kinh nghiệm làm việc
+                        </h3>
+
+                        <!-- <div class="cv__experience">
+                            <div class="cv__experience-head">
+                                <div class="cv__experience-left">
+                                    <p class="cv__experience-company">On Point Electronics, NYC, NY</p>
+                                    <p class="cv__experience-role">Customer Service Representative</p>
+                                </div>
+                                <p class="cv__experience-range">(January 2013 - July 2018)</p>
+                            </div>
+                            <div class="cv__experience-body">
+                                <ul>
+                                    <li>
+                                        Organized customer information and account data for business planning and
+                                        customer service purposes.
+                                    </li>
+                                    <li>
+                                        Created excel spreadsheets to track customer data and perform intense
+                                        reconciliation process.
+                                    </li>
+                                    <li>
+                                        Received 97% positive customer survey results.
+                                    </li>
+                                    <li>
+                                        Speed on calls was 10% above team average.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="cv__experience">
+                            <div class="cv__experience-head">
+                                <div class="cv__experience-left">
+                                    <p class="cv__experience-company">On Point Electronics, NYC, NY</p>
+                                    <p class="cv__experience-role">Customer Service Representative</p>
+                                </div>
+                                <p class="cv__experience-range">(January 2013 - July 2018)</p>
+                            </div>
+                            <div class="cv__experience-body">
+                                <ul>
+                                    <li>
+                                        Organized customer information and account data for business planning and
+                                        customer service purposes.
+                                    </li>
+                                    <li>
+                                        Created excel spreadsheets to track customer data and perform intense
+                                        reconciliation process.
+                                    </li>
+                                    <li>
+                                        Received 97% positive customer survey results.
+                                    </li>
+                                    <li>
+                                        Speed on calls was 10% above team average.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="cv__experience">
+                            <div class="cv__experience-head">
+                                <div class="cv__experience-left">
+                                    <p class="cv__experience-company">On Point Electronics, NYC, NY</p>
+                                    <p class="cv__experience-role">Customer Service Representative</p>
+                                </div>
+                                <p class="cv__experience-range">(January 2013 - July 2018)</p>
+                            </div>
+                            <div class="cv__experience-body">
+                                <ul>
+                                    <li>
+                                        Organized customer information and account data for business planning and
+                                        customer service purposes.
+                                    </li>
+                                    <li>
+                                        Created excel spreadsheets to track customer data and perform intense
+                                        reconciliation process.
+                                    </li>
+                                    <li>
+                                        Received 97% positive customer survey results.
+                                    </li>
+                                    <li>
+                                        Speed on calls was 10% above team average.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="cv__experience">
+                            <div class="cv__experience-head">
+                                <div class="cv__experience-left">
+                                    <p class="cv__experience-company">On Point Electronics, NYC, NY</p>
+                                    <p class="cv__experience-role">Customer Service Representative</p>
+                                </div>
+                                <p class="cv__experience-range">(January 2013 - July 2018)</p>
+                            </div>
+                            <div class="cv__experience-body">
+                                <ul>
+                                    <li>
+                                        Organized customer information and account data for business planning and
+                                        customer service purposes.
+                                    </li>
+                                    <li>
+                                        Created excel spreadsheets to track customer data and perform intense
+                                        reconciliation process.
+                                    </li>
+                                    <li>
+                                        Received 97% positive customer survey results.
+                                    </li>
+                                    <li>
+                                        Speed on calls was 10% above team average.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+
+                    </div>
+                    <div class="cv__educations" id="js-educations">
+                        <h3 class="cv__educations-heading" id="js-education-heading">
+                            Giáo dục
+                        </h3>
+
+                        <!-- <div class="cv__education">
+                            <div class="cv__education-left">
+                                <p class="cv__education-institution">University of California, Berkeley, CA</p>
+                                <p class="cv__education-fos">Masters Computer Science</p>
+                            </div>
+                            <div class="cv__education-right">
+                                <p class="cv__education-range">(September 2001 - August 2002)</p>
+                                <p class="cv__education-gpa">8.0 CGPA</p>
+                            </div>
+                        </div>
+
+                        <div class="cv__education">
+                            <div class="cv__education-left">
+                                <p class="cv__education-institution">University of California, Berkeley, CA</p>
+                                <p class="cv__education-fos">Masters Computer Science</p>
+                            </div>
+                            <div class="cv__education-right">
+                                <p class="cv__education-range">(September 2001 - August 2002)</p>
+                                <p class="cv__education-gpa">8.0 CGPA</p>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="cv__projects" id="js-projects">
+                        <h3 class="cv__projects-heading" id="js-project-heading">
+                            Dự án
+                        </h3>
+
+                        <!-- <div class="cv__project">
+                            <div class="cv__project-head">
+                                <div class="cv__project-left">
+                                    <p class="cv__project-title">Random Project</p>
+                                    <p class="cv__project-url">http://github.com/icon-club</p>
+                                </div>
+                                <p class="cv__project-range">(October 2001 - October 2003)</p>
+                            </div>
+                            <div class="cv__project-body">
+                                <p class="cv__project-summary">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nunc eget
+                                    nisl
+                                    dapibus commodo a et augue. Quisque pulvinar tristique odio in dignissim.
+                                    Maecenas
+                                    justo est, sagittis molestie neque a, scelerisque dictum dolor. Sed pretium
+                                    congue
+                                    imperdiet. Vivamus ornare ullamcorper dolor sit amet dictum.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="cv__project">
+                            <div class="cv__project-head">
+                                <div class="cv__project-left">
+                                    <p class="cv__project-title">Random Project</p>
+                                    <p class="cv__project-url">http://github.com/icon-club</p>
+                                </div>
+                                <p class="cv__project-range">(October 2001 - October 2003)</p>
+                            </div>
+                            <div class="cv__project-body">
+                                <p class="cv__project-summary">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nunc eget
+                                    nisl
+                                    dapibus commodo a et augue. Quisque pulvinar tristique odio in dignissim.
+                                    Maecenas
+                                    justo est, sagittis molestie neque a, scelerisque dictum dolor. Sed pretium
+                                    congue
+                                    imperdiet. Vivamus ornare ullamcorper dolor sit amet dictum.
+                                </p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+    </main>
+
+    <div class="modal" id="js-social-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Mạng xã hội</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-social-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="social-network-type">Loại</label>
+                    <input class="form__input" type="text" id="social-network-type" name="social-network-type" required
+                        placeholder="Github">
+                    <p class="form__note">Loại mạng xã hội chỉ có thể dùng Twitter, Linkedin, Instagram hoặc
+                        Github</p>
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="social-network-username">Tên tài khoản</label>
+                    <input class="form__input" type="text" id="social-network-type" name="social-network-username"
+                        required placeholder="iconclub">
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="js-experience-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Kinh nghiệm làm việc</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-experience-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="experience-company">Tên công ty</label>
+                    <input class="form__input" type="text" id="experience-company" name="experience-company" required
+                        placeholder="NOIC">
+                </div>
+                <div class="form__control form__control--split">
+                    <div>
+                        <label class="form__label form__label--required" for="experience-role">Vị trí</label>
+                        <input class="form__input" type="text" id="experience-role" name="experience-role" required
+                            placeholder="Kỹ sư phần mềm">
+                    </div>
+                    <div>
+                        <label class="form__label" for="experience-company-website">Web công ty</label>
+                        <input class="form__input" type="text" id="experience-company-website"
+                            name="experience-company-website" placeholder="https://">
+                    </div>
+                </div>
+                <div class="form__control form__control--split">
+                    <div>
+                        <label class="form__label form__label--required" for="experience-start-date">Ngày bắt
+                            đầu</label>
+                        <input class="form__input" type="date" id="experience-start-date" name="experience-start-date"
+                            required>
+                    </div>
+                    <div>
+                        <label class="form__label" for="experience-end-date">Ngày kết thúc</label>
+                        <input class="form__input" type="date" id="experience-end-date" name="experience-end-date">
+                    </div>
+                </div>
+                <div class="form__control">
+                    <label class="form__label" for="experience-summary">Mô tả</label>
+                    <textarea class="form__input" id="experience-summary" name="experience-summary" rows="5"></textarea>
+                    <p class="form__note">
+                        <a class="form__note-link" href="https://www.markdownguide.org/basic-syntax/">Markdown</a>
+                        được hỗ trợ ở mục này.
+                    </p>
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="js-education-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Giáo dục</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-education-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="education-institution">Nơi giáo dục</label>
+                    <input class="form__input" type="text" id="education-institution" name="education-institution"
+                        required placeholder="Đại học Tôn Đức Thắng">
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="education-fos">Lĩnh vực giáo dục</label>
+                    <input class="form__input" type="text" id="education-fos" name="education-fos" required
+                        placeholder="Khoa học máy tính">
+                </div>
+                <div class="form__control form__control--split">
+                    <div>
+                        <label class="form__label form__label--required" for="education-degree-type">Loại bằng</label>
+                        <input class="form__input" type="text" id="education-degree-type" name="education-degree-type"
+                            required placeholder="Kỹ sư">
+                    </div>
+                    <div>
+                        <label class="form__label for=" education-gpa">GPA</label>
+                        <input class="form__input" type="text" id="education-gpa" name="education-gpa"
+                            placeholder="9.0">
+                    </div>
+                </div>
+                <div class="form__control form__control--split">
+                    <div>
+                        <label class="form__label form__label--required" for="education-start-date">Ngày bắt
+                            đầu</label>
+                        <input class="form__input" type="date" id="education-start-date" name="education-start-date"
+                            required>
+                    </div>
+                    <div>
+                        <label class="form__label" for="education-end-date">Ngày kết thúc</label>
+                        <input class="form__input" type="date" id="education-end-date" name="education-end-date">
+                    </div>
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="js-project-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Dự án</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-project-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="project-title">Tên dự án</label>
+                    <input class="form__input" type="text" id="project-title" name="project-title" required
+                        placeholder="ICON's CV Builder">
+                </div>
+                <div class="form__control">
+                    <label class="form__label" for="project-website">Web dự án</label>
+                    <input class="form__input" type="text" id="project-website" name="project-website"
+                        placeholder="https://">
+                </div>
+                <div class="form__control form__control--split">
+                    <div>
+                        <label class="form__label form__label--required" for="project-start-date">Ngày bắt
+                            đầu</label>
+                        <input class="form__input" type="date" id="project-start-date" name="project-start-date"
+                            required>
+                    </div>
+                    <div>
+                        <label class="form__label" for="project-end-date">Ngày kết thúc</label>
+                        <input class="form__input" type="date" id="project-end-date" name="project-end-date">
+                    </div>
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="project-summary">Mô tả</label>
+                    <textarea class="form__input" id="project-summary" name="project-summary" rows="5"
+                        required></textarea>
+                    <p class="form__note">
+                        <a class="form__note-link" href="https://www.markdownguide.org/basic-syntax/">Markdown</a>
+                        được hỗ trợ ở mục này.
+                    </p>
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="js-award-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Giải thưởng</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-award-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="award-name">Tên giải thưởng</label>
+                    <input class="form__input" type="text" id="award-name" name="award-name" required
+                        placeholder="Vietnam Hackathon Day 2018">
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="award-authority">Tổ chức trao giải</label>
+                    <input class="form__input" type="text" id="award-authority" name="award-authority" required
+                        placeholder="VINASA">
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="award-date">Ngày trao giải</label>
+                    <input class="form__input" type="date" id="award-date" name="award-date">
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="js-certificate-modal">
+        <div class="modal__body">
+            <div class="modal__heading">
+                <p class="modal__heading-title">Chứng chỉ</p>
+                <p class="modal__close">&times;</p>
+            </div>
+            <form class="form" id="js-certificate-form">
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="certificate-name">Tên chứng chỉ</label>
+                    <input class="form__input" type="text" id="certificate-name" name="certificate-name" required
+                        placeholder="TOEIC">
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="certificate-authority">Tổ chức trao
+                        chứng chỉ</label>
+                    <input class="form__input" type="text" id="certificate-authority" name="certificate-authority"
+                        required placeholder="ETS">
+                </div>
+                <div class="form__control">
+                    <label class="form__label form__label--required" for="certificate-date">Ngày trao chứng chỉ</label>
+                    <input class="form__input" type="date" id="certificate-date" name="certificate-date">
+                </div>
+                <div class="form__actions">
+                    <button class="form__submit" type="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/index.js">
+    </script>
+</body>
+
+</html>

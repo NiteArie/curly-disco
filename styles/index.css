@@ -1,0 +1,238 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    --whiteText: hsl(0, 0%, 96%);
+    --labelColor: hsl(0, 0%, 74%);
+    --formInputBG: hsl(0, 0%, 26%);
+    --formItemBorder: hsl(220, 13%, 51%);
+    --sidebarBG: hsl(0, 0%, 13%);
+    --cvTheme: hsl(174, 100%, 29%);
+    --cvHeroColor: hsl(0, 0%, 96%);
+    --labelRequiredColor: hsl(0, 50%, 50%);
+}
+
+.main {
+    display: flex;
+}
+
+.sidebar {
+    width: 30%;
+    height: 100vh;
+    overflow-y: scroll;
+    display: flex;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--sidebarBG);
+}
+
+.cv__wrapper {
+    width: 70%;
+}
+
+.sidebar__icon {
+    width: 80px;
+    height: auto;
+}
+
+.sidebar__second {
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    color: var(--whiteText);
+}
+
+.sidebar__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar__headline {
+    color: var(--whiteText);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sidebar__heading-button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.sidebar__heading-icon {
+    width: 20px;
+    height: auto;
+}
+
+.form {
+    margin-top: 1rem;
+}
+
+.form__hr {
+    margin-bottom: 1.5rem;
+}
+
+.form__content {
+    display: none;
+}
+
+.form__content--show {
+    display: block;
+}
+
+.form__control {
+    margin-bottom: 1.5rem;
+}
+
+.form__control--side {
+    display: flex;
+    align-items: center;
+}
+
+.form__control--left {
+    width: 100%;
+    margin-left: 1rem;
+}
+
+.form__control--split {
+    display: flex;
+}
+
+.form__control--split > * {
+    flex: 1;
+}
+
+.form__control--split > * + *{
+    margin-left: 1rem;
+}
+
+.form__label {
+    display: block;
+    color: var(--labelColor);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.form__label--required::after {
+    content: "*";
+    color: var(--labelRequiredColor);
+}
+
+.form__label--file {
+    display: flex;
+    /* width: 60px;
+    height: 60px; */
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--formInputBG);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.form__input {
+    width: 100%;
+    background-color: var(--formInputBG);
+    color: var(--whiteText);
+    font-family: "Open Sans", sans-serif;
+    padding: 10px;
+    border: 0;
+    border-radius: 2px;
+}
+
+.form__subheading {
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--labelColor);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.form__section {
+    margin-bottom: 1.5rem;
+}
+
+.form__section-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form__section-add {
+    background-color: transparent;
+    color: var(--whiteText);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--whiteText);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form__actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form__submit {
+    padding: 0.5rem 1rem;
+    font-family: "Open Sans", sans-serif;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0;
+}
+
+.form__submit:hover {
+    background-color: hsl(0, 0%, 90%);
+}
+
+.form__note {
+    margin-top: 0.5rem;
+    color: var(--labelColor);
+    font-size: 13px;
+}
+
+.form__note-link {
+    text-decoration: none;
+}
+
+.form__items {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--formItemBorder);
+    border-radius: 4px;
+}
+
+.form__item {
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form__item + .form__item {
+    border-top: 1px solid var(--formItemBorder);
+}
+
+.form__item-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form__item-subtitle {
+    margin-top: 0.5rem;
+    font-size: 12px;
+}
+
+.form__item-remove {
+    font-size: 1.5rem;
+    color: var(--whiteText);
+    cursor: pointer;
+}

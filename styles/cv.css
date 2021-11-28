@@ -1,0 +1,211 @@
+.cv__wrapper {
+    padding: 2rem;
+    background-color: var(--sidebarBG);
+}
+
+.cv {
+    padding: 1.5rem;
+    display: flex;
+    background-color: white;
+    gap: 2rem;
+}
+
+.cv__left {
+    width: 35%;
+}
+
+.cv__profile {
+    margin-bottom: 2rem;
+    display: flex;
+}
+
+.cv__profile-picture {
+    width: 180px;
+    height: auto;
+}
+
+.cv__socials {
+    margin-top: 1rem;
+}
+
+.cv__social {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.cv__social-icon {
+    margin-right: 1rem;
+    width: 1rem;
+}
+
+.cv__social-content {
+    font-size: 14px;
+}
+
+.cv__awards,
+.cv__certifications,
+.cv__experiences,
+.cv__educations,
+.cv__projects
+{
+    margin-top: 1rem;
+}
+
+.cv__awards-heading,
+.cv__certificates-heading,
+.cv__experiences-heading,
+.cv__educations-heading,
+.cv__projects-heading
+{
+    padding-bottom: 2px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--cvTheme);
+    color: var(--cvTheme);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cv__award {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv__award-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cv__award-authority {
+    font-size: 12px;
+}
+
+.cv__award-time {
+    font-size: 12px;
+}
+
+.cv__certificate {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv__certificate-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cv__certificate-authority {
+    font-size: 12px;
+}
+
+.cv__certificate-time {
+    font-size: 12px;
+}
+
+.cv__right {
+    width: 65%;
+}
+
+.cv__hero {
+    padding: 1rem;
+    background-color: var(--cvTheme);
+    color: var(--cvHeroColor);
+}
+
+.cv__hero-subtitle {
+    font-size: 14px;
+}
+
+.cv__objective {
+    margin-top: 0.5rem;
+}
+
+.cv__objective-content {
+    font-size: 13px;
+}
+
+.cv__experience + .cv__experience {
+    margin-top: 1rem;
+}
+
+.cv__experience-head {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv__experience-company {
+    font-weight: bold;
+}
+
+.cv__experience-role {
+    font-size: 14px;
+}
+
+.cv__experience-range {
+    font-size: 14px;
+}
+
+.cv__experience-body {
+    font-size: 14px;
+}
+
+.cv__experience-body li {
+    margin-left: 1rem;
+}
+
+.cv__education {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv__education-institution {
+    font-weight: bold;
+}
+
+.cv__education-fos {
+    font-size: 14px;
+}
+
+.cv__education-range {
+    font-size: 14px;
+}
+
+.cv__education-gpa {
+    font-size: 14px;
+    text-align: right;
+}
+
+.cv__project + .cv__project {
+    margin-top: 1rem;
+}
+
+.cv__project-head {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cv__project-title {
+    font-weight: bold;
+}
+
+.cv__project-url {
+    font-size: 14px;
+}
+
+.cv__project-range {
+    font-size: 14px;
+}
+
+.cv__project-body {
+    font-size: 14px;
+}
